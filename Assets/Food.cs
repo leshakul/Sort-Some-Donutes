@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,13 +6,23 @@ public class Food : MonoBehaviour
     [SerializeField] private string _title;
 
     public bool _isClick = false;
-    public bool _isCreate = false;
+    private bool _isCreate = false;
 
     public string Title => _title;
 
     private void OnMouseDown()
     {
-        _isClick = true;
+        _isClick = true;      
+    }
+
+    public bool CheckIsCreate()
+    {
+        return _isCreate;
+    }
+
+    public void ChangeIsCreate()
+    {
+        _isCreate = true;
     }
 
     public bool ReturnIsClick()

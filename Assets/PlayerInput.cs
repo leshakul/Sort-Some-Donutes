@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,10 +7,7 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private Lane _lane;
     [SerializeField] private GameOverScreen _gameOverScreen;
     [SerializeField] private Training _training;
-    [SerializeField] private GameObject _gameObject;
-    [SerializeField] private GameObject _gameObject1;
-    [SerializeField] private GameObject _gameObject2;
-    [SerializeField] private GameObject _gameObject3;
+    [SerializeField] private List<GameObject> _arrows;
     [SerializeField] private GameObject _text;
     [SerializeField] private GameObject _text1;
 
@@ -25,10 +21,10 @@ public class PlayerInput : MonoBehaviour
             {
                 Food food = _spawner.InstantiateFood(_lane.SpawnPoints[i].transform.position);
                 _lane.AddFood(food);
-                _training.OffGameObject(_gameObject);
-                _training.OffGameObject(_gameObject1);
-                _training.OffGameObject(_gameObject2);
-                _training.OffGameObject(_gameObject3);
+                _training.OffGameObject(_arrows[0]);
+                _training.OffGameObject(_arrows[1]);
+                _training.OffGameObject(_arrows[2]);
+                _training.OffGameObject(_arrows[3]);
                 _training.OffGameObject(_text);
                 
                 if(_isDone == false)

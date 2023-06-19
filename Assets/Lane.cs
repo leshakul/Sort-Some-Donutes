@@ -1,9 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UIElements;
 
 public class Lane : MonoBehaviour
 {
@@ -12,25 +9,11 @@ public class Lane : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private GameOverScreen _gameOverScreen;
 
-    private Food _currentFood;
-    private int _currentId;
-
     public List<SpawnPoint> SpawnPoints => _spawnPoints;
-    public List<Food> Foods => _foods;
 
     private void Update()
     {
-        CheckForMatch();
-
-        for (int i = 0; i < _foods.Count; i++)
-        {
-            if (_foods[i].ReturnIsClick() == true)
-            {
-                _currentFood = _foods[i];
-                _currentId = i;
-                _foods[i].OffClick();
-            }
-        }
+        CheckForMatch();  
     }
 
     private void CheckForMatch()
@@ -55,19 +38,9 @@ public class Lane : MonoBehaviour
         }
     }
 
-    public Food GetFood()
+    public void SetFood(Food food, int id)
     {
-        return _currentFood;
-    }
-
-    public void DeleteCurrentFood()
-    {
-        _currentFood = null;
-    }
-
-    public void SetFood(Food food)
-    {
-        _foods[_currentId] = food;
+        _foods[id] = food;
     }  
 
     public void AddFood(Food food)

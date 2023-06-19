@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +10,13 @@ public class Spawner : MonoBehaviour
 
     private Food _currentFood;
 
+    private int GetRandomIndex()
+    {
+        int randomIndex = Random.Range(0, _prefabs.Count);
+
+        return randomIndex;
+    }
+
     public void CreateFood()
     {
         if(_isClick == false)
@@ -21,18 +27,12 @@ public class Spawner : MonoBehaviour
         }      
     }
 
-    private int GetRandomIndex()
-    {
-        int randomIndex = Random.Range(0, _prefabs.Count);
-
-        return randomIndex;
-    }   
-
     public Food InstantiateFood(Vector3 position)
     {
         Food food = _currentFood;
         _currentFood.DestroyMe();
         _isClick = false;
+
         return Instantiate(food, position, food.transform.rotation);
     }
 }
