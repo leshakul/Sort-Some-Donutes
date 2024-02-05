@@ -31,18 +31,22 @@ public class LeaderBoardView : MonoBehaviour
     public void OpenYandexLeaderboard()
     {
         PlayerAccount.RequestPersonalProfileDataPermission();
+        
         if (!PlayerAccount.IsAuthorized)
             PlayerAccount.Authorize();
 
         Leaderboard.GetEntries(_leaderboardName, (result) =>
         {
             int leadersNumber = result.entries.Length >= _leaderNames.Length ? _leaderNames.Length : result.entries.Length;
+            
             for (int i = 0; i < leadersNumber; i++)
             {
                 _players[i].SetActive(true);
                 string name = result.entries[i].player.publicName;
+                
                 if (string.IsNullOrEmpty(name))
                     name = "Anonimus";
+
                 _leaderNames[i].text = name;
                 _scoreList[i].text = result.entries[i].formattedScore;
             }
@@ -62,10 +66,15 @@ public class LeaderBoardView : MonoBehaviour
         _leaderboard.SetActive(false);
     }
 
-    public void CloseAuthorizePanel()
+    public void CloseAuthorizePanelWithAuthorize()
     {
         _authorizePanel.SetActive(false);
         PlayerAccount.Authorize();
+    }
+
+    public void CloseAuthorizePanelWithoutAuthorize()
+    {
+        _authorizePanel.SetActive(false);
     }
 
     private void OpenLeaderboardPanel()

@@ -50,6 +50,53 @@ public class GameOverScreen : MonoBehaviour
         }
     }
 
+    public void AddFood(Food food)
+    {
+        _foods.Add(food);
+    }
+
+    public void OpenPanel()
+    {
+        _reward.PlayRewardAfterDie();
+        _gameOverScreen.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void ExitMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public int GetCountFoods()
+    {
+        return _foods.Count;
+    }
+
+    public List<Food> ReturnFoods()
+    {
+        return _foods;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void ClearFoodCount(string title)
+    {
+        for (int x = 0; x < _titleFoods.Count; x++)
+        {
+            if (title == _titleFoods[x])
+            {
+                if (_foodsCount[x] >= 3)
+                {
+                    _foodsCount[x] -= 3;
+                    break;
+                }
+            }
+        }
+    }
+
     private void CheckCountFood()
     {
         for (int i = 0; i < _foodsCount.Count; i++)
@@ -94,53 +141,6 @@ public class GameOverScreen : MonoBehaviour
             if (_foods[i] == null)
             {
                 _foods.Remove(_foods[i]);
-            }
-        }
-    }
-
-    public void AddFood(Food food)
-    {
-        _foods.Add(food);
-    }   
-
-    public void OpenPanel()
-    {
-        _reward.PlayRewardAfterDie();
-        _gameOverScreen.SetActive(true);
-        Time.timeScale = 0;
-    }
-
-    public void ExitMenu()
-    {
-        SceneManager.LoadScene(0);
-    }
-
-    public int GetCountFoods()
-    {
-        return _foods.Count;
-    }
-
-    public List<Food> ReturnFoods()
-    {
-        return _foods;
-    }
-
-    public void Restart()
-    {
-        SceneManager.LoadScene(1);
-    }
-
-    public void ClearFoodCount(string title)
-    {
-        for (int x = 0; x < _titleFoods.Count; x++)
-        {
-            if (title == _titleFoods[x])
-            {
-                if (_foodsCount[x] >= 3)
-                {
-                    _foodsCount[x] -= 3;
-                    break;
-                }            
             }
         }
     }

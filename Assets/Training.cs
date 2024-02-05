@@ -1,18 +1,20 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Training : MonoBehaviour
 {
-    [SerializeField] private GameObject _arrow;
-    [SerializeField] private GameObject _text;
+    [SerializeField] private Image _arrow;
+    [SerializeField] private Image _text;
     [SerializeField] private GameOverScreen _gameOver;
-    [SerializeField] private GameObject _text1;
-    [SerializeField] private GameObject _arrow1;
-    [SerializeField] private GameObject _text2;
-    [SerializeField] private GameObject _arrow2;
-    [SerializeField] private GameObject _text3;
-    [SerializeField] private GameObject _text4;
-    [SerializeField] private List<GameObject> _gameObjects;
+    [SerializeField] private Image _text1;
+    [SerializeField] private Image _arrow1;
+    [SerializeField] private Image _text2;
+    [SerializeField] private Image _arrow2;
+    [SerializeField] private Image _text3;
+    [SerializeField] private Image _text4;
+    [SerializeField] private List<Image> _gameObjects;
     [SerializeField] private GameObject _training;
     [SerializeField] private GameObject _trainingButton;
 
@@ -34,8 +36,8 @@ public class Training : MonoBehaviour
 
         if (_isPlay == 0)
         {
-            _arrow.SetActive(true);
-            _text.SetActive(true);
+            _arrow.gameObject.SetActive(true);
+            _text.gameObject.SetActive(true);
             _isPlay = 1;
         }    
     }
@@ -44,7 +46,7 @@ public class Training : MonoBehaviour
     {
         if (_gameOver.GetCountFoods() == 12)
         {
-            _text1.SetActive(false);
+            _text1.gameObject.SetActive(false);
 
             if (_isDone == false)
             {
@@ -69,14 +71,6 @@ public class Training : MonoBehaviour
                 }
             }
         }
-
-        for (int i = 0; i < _gameOver.ReturnFoods().Count; i++)
-        {
-            if (_gameOver.ReturnFoods()[i].ReturnIsClick())
-            {
-                OffGameObject(_text4);
-            }
-        }
     }
 
     public void SaveTraining()
@@ -84,33 +78,38 @@ public class Training : MonoBehaviour
         PlayerPrefs.SetInt("_isPlay", _isPlay);
     }
 
-    public void OffGameObject(GameObject gameObject)
+    public void OffGameObject(Image image)
     {
-        gameObject.SetActive(false);
+        image.gameObject.SetActive(false);
     }
 
     public void OffObject()
     {
-        _arrow2.SetActive(false);
-        _text3.SetActive(false);
+        _arrow2.gameObject.SetActive(false);
+        _text3.gameObject.SetActive(false);
+    }
+
+    public void OffText()
+    {
+        _text4.gameObject.SetActive(false);
     }
 
     public void OpenObject()
     {
-        _text4.SetActive(true);
+        _text4.gameObject.SetActive(true);
     }
 
-    public void OpenArrow(GameObject gameObject)
+    public void OpenArrow(Image image)
     {
         if(_gameObjects.Count != 5)
         {
-            gameObject.SetActive(true);
-            _gameObjects.Add(gameObject);
+            image.gameObject.SetActive(true);
+            _gameObjects.Add(image);
         }
     }
 
-    public void OpenGameObject(GameObject gameObject)
+    public void OpenGameObject(Image image)
     {
-        gameObject.SetActive(true);
+        image.gameObject.SetActive(true);
     }
 }

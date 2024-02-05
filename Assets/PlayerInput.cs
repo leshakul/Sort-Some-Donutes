@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInput : MonoBehaviour
 {
@@ -7,9 +8,9 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] private Lane _lane;
     [SerializeField] private GameOverScreen _gameOverScreen;
     [SerializeField] private Training _training;
-    [SerializeField] private List<GameObject> _arrows;
-    [SerializeField] private GameObject _text;
-    [SerializeField] private GameObject _text1;
+    [SerializeField] private List<Image> _arrows;
+    [SerializeField] private Image _text;
+    [SerializeField] private Image _text1;
 
     private bool _isDone = false;
 
@@ -19,7 +20,7 @@ public class PlayerInput : MonoBehaviour
         {
             if (_lane.SpawnPoints[i].IsEmpty != false)
             {
-                Food food = _spawner.InstantiateFood(_lane.SpawnPoints[i].transform.position);
+                Food food = _spawner.ReturnInstantiateFood(_lane.SpawnPoints[i].transform.position);
                 _lane.AddFood(food);
                 _training.OffGameObject(_arrows[0]);
                 _training.OffGameObject(_arrows[1]);

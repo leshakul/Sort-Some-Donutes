@@ -16,37 +16,37 @@ public class ShowReward : MonoBehaviour
         InterstitialAd.Show(_music.OffMusicInReward, OnMusic);
     }
 
+    public bool GetIsPlayReward()
+    {
+        return _isPlayReward;
+    }
+
+    public void ClosePanel(GameObject gameObject)
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void PlayRewardOnButtonClick()
+    {
+        VideoAd.Show(_music.OffMusicInReward, ChangeIsPlayReward, _music.OnMusic);
+        OpenPanel();
+    }
+
+    private void ChangeIsPlayReward()
+    {
+        _isPlayReward = true;
+    }
+
+    private void OpenPanel()
+    {
+        _panel.SetActive(true);
+    }  
+
     private void OnMusic(bool obj)
     {
         if (obj)
         {
             _music.OnMusic();
         }  
-    }
-
-    public bool GetIsPlayReward()
-    {
-        return _isPlayReward;
-    }
-
-    public void PlayRewardOnButtonClick()
-    {
-        VideoAd.Show(_music.OffMusicInReward, isPlayReward, _music.OnMusic);
-        OpenPanel();      
-    }
-
-    public void isPlayReward()
-    {
-        _isPlayReward = true;
-    }
-
-    public void OpenPanel()
-    {
-        _panel.SetActive(true);
-    }
-
-    public void ClosePanel(GameObject gameObject)
-    {
-        gameObject.SetActive(false);
     }
 }

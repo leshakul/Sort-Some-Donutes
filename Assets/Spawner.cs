@@ -10,13 +10,6 @@ public class Spawner : MonoBehaviour
 
     private Food _currentFood;
 
-    private int GetRandomIndex()
-    {
-        int randomIndex = Random.Range(0, _prefabs.Count);
-
-        return randomIndex;
-    }
-
     public void CreateFood()
     {
         if(_isClick == false)
@@ -27,12 +20,19 @@ public class Spawner : MonoBehaviour
         }      
     }
 
-    public Food InstantiateFood(Vector3 position)
+    public Food ReturnInstantiateFood(Vector3 position)
     {
         Food food = _currentFood;
-        _currentFood.DestroyMe();
+        _currentFood.DestroyFood();
         _isClick = false;
 
         return Instantiate(food, position, food.transform.rotation);
+    }
+
+    private int GetRandomIndex()
+    {
+        int randomIndex = Random.Range(0, _prefabs.Count);
+
+        return randomIndex;
     }
 }

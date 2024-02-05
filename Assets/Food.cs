@@ -5,14 +5,14 @@ public class Food : MonoBehaviour
 {
     [SerializeField] private string _title;
 
-    public bool _isClick = false;
+    public bool IsClick { get; private set; }
     private bool _isCreate = false;
 
     public string Title => _title;
 
     private void OnMouseDown()
     {
-        _isClick = true;      
+        IsClick = true;      
     }
 
     public bool CheckIsCreate()
@@ -27,15 +27,15 @@ public class Food : MonoBehaviour
 
     public bool ReturnIsClick()
     {
-        return _isClick;
+        return IsClick;
     }
 
     public void OffClick()
     {
-        _isClick = false;
+        IsClick = false;
     }
 
-    public void DestroyMe()
+    public void DestroyFood()
     {
         Destroy(gameObject);
     }

@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private ShowReward _reward;
     [SerializeField] private LeaderBoardView _leaderboard;
+    
     private int _score = 0;
     private int _highScore = 0;
 

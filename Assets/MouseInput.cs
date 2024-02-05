@@ -6,30 +6,35 @@ using UnityEngine.Events;
 
 public class MouseInput : MonoBehaviour
 {
-    public Food _food;
+    public UnityAction<Lane> LaneIsClick;
     public UnityAction<Food> FoodIsClick;
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonUp(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            RaycastHit hit;
+            RaycastHit[] hitColliders = Physics.RaycastAll(ray);
 
-            if (Physics.Raycast(ray, out hit))
+            foreach(RaycastHit hit in hitColliders)
             {
-                if (hit.collider.gameObject.GetComponent<Food>())
+                if (hit.collider.gameObject.TryGetComponent(out Food food))
                 {
-                    if(_food == null)
+                    if (food.ReturnIsClick() == true)
                     {
-                        _food = hit.collider.gameObject.GetComponent<Food>();
-                    }
+                        FoodIsClick?.Invoke(food);
 
-                    FoodIsClick?.Invoke(_food);
-                    _food = null;
-                }
-            }
-        }      
+                        foreach (RaycastHit Hit in hitColliders)
+                        {
+                            if (Hit.collider.gameObject.TryGetComponent(out Lane lane))
+                            {
+                                LaneIsClick?.Invoke(lane);                               
+                            }
+                        }
+                    }                   
+                }                
+            }           
+        }
     }
 }
